@@ -24,6 +24,8 @@ import java.util.Map;
 import static android.R.attr.button;
 
 public class MainActivity extends AppCompatActivity {
+    private String username="<colocar_username>";
+    private String password="<colocar_password>";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //El URL para creación de registros se compone del URL del servicio + nombre de la BD
-        String url = "https://9a677ddf-a679-46bd-a28a-e5559d80abf5-bluemix.cloudant.com:443/appointments_db";
+        String url = "https://" + username + ".cloudant.com:443/appointments_db";
         //El tercer parámetro es el objeto JSON que contiene los valores a almacenar
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, cita, new Response.Listener<JSONObject>() {
             @Override
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
-                String credentials = "9a677ddf-a679-46bd-a28a-e5559d80abf5-bluemix:32c72a6b64dad3e62ca693f6ff18967c7ace01b9348b96b38574787a75a14968";
+                String credentials = username + ":" + password;
                 String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 headers.put("Authorization", auth);
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     public void deleteRecord (){
 
         //El URL para búsqueda de registros se compone del URL del servicio + nombre de la BD + id?rev=rev del registro
-        String url = "https://9a677ddf-a679-46bd-a28a-e5559d80abf5-bluemix.cloudant.com:443/appointments_db/bce8cf6401a6884d69803b8974df8ec0?rev=1-3a932fea0a74249d6feeaf4c75e2aefa";
+        String url = "https://" + username + ".cloudant.com:443/appointments_db/bce8cf6401a6884d69803b8974df8ec0?rev=1-3a932fea0a74249d6feeaf4c75e2aefa";
         //El tercer parámetro es nulo porque no se requiere enviar parámetros. El método del Request debe ser "DELETE"
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.DELETE, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
-                String credentials = "9a677ddf-a679-46bd-a28a-e5559d80abf5-bluemix:32c72a6b64dad3e62ca693f6ff18967c7ace01b9348b96b38574787a75a14968";
+                String credentials = username + ":" + password;
                 String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
                 headers.put("Authorization", auth);
                 return headers;
@@ -128,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //El URL para búsqueda de registros se compone del URL del servicio + nombre de la BD + string "_find"
-        String url = "https://9a677ddf-a679-46bd-a28a-e5559d80abf5-bluemix.cloudant.com:443/appointments_db/_find";
+        String url = "https://" + username + ".cloudant.com:443/appointments_db/_find";
         //El tercer parámetro es el objeto JSON que contiene los valores a almacenar
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
             @Override
@@ -146,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
-                String credentials = "9a677ddf-a679-46bd-a28a-e5559d80abf5-bluemix:32c72a6b64dad3e62ca693f6ff18967c7ace01b9348b96b38574787a75a14968";
+                String credentials = username + ":" + password;
                 String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 headers.put("Authorization", auth);
